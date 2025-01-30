@@ -163,6 +163,163 @@
 			"response": []
 		},
 		{
+			"name": "testinfintegration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b92ce86e-5b7b-4922-a7d0-ddb80360fa3d",
+						"exec": [
+							"\r",
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": { \"type\": \"integer\" },\r",
+							"    \"msg\": { \"type\": \"string\" },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"wgStatus\": { \"type\": \"string\" },\r",
+							"        \"wgPolicy\": { \"type\": \"object\" },\r",
+							"        \"plan\": { \"type\": [\"null\", \"string\", \"object\"] }, // Updated here to allow 'object'\r",
+							"        \"fdmUser\": {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"            \"extraDataObject\": {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"speed\": { \"type\": \"integer\" },\r",
+							"                \"totalPaid\": { \"type\": [\"null\", \"number\"] }\r",
+							"              },\r",
+							"              \"required\": [\"speed\", \"totalPaid\"]\r",
+							"            },\r",
+							"            \"createdOn\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+							"            \"name\": { \"type\": \"string\" },\r",
+							"            \"storeGroupId\": { \"type\": \"string\" },\r",
+							"            \"email\": { \"type\": \"string\" },\r",
+							"            \"macId\": { \"type\": \"string\" },\r",
+							"            \"transactionId\": { \"type\": [\"null\", \"string\"] },\r",
+							"            \"charges\": { \"type\": [\"null\", \"number\"] },\r",
+							"            \"updatedBy\": { \"type\": \"string\" },\r",
+							"            \"status\": { \"type\": \"string\" },\r",
+							"            \"mobile\": { \"type\": [\"null\", \"string\"] },\r",
+							"            \"otpIssuedTime\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+							"            \"otpExpiryTime\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+							"            \"otp\": { \"type\": [\"null\", \"string\"] },\r",
+							"            \"nasid\": { \"type\": [\"null\", \"integer\"] },\r",
+							"            \"createdBy\": { \"type\": [\"null\", \"integer\"] },\r",
+							"            \"id\": { \"type\": \"integer\" },\r",
+							"            \"selectedPlanId\": { \"type\": \"integer\" },\r",
+							"            \"deviceAllowed\": { \"type\": \"integer\" },\r",
+							"            \"dataPlan\": { \"type\": \"integer\" },\r",
+							"            \"timePlan\": { \"type\": \"integer\" }\r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \"extraDataObject\",\r",
+							"            \"createdOn\",\r",
+							"            \"name\",\r",
+							"            \"storeGroupId\",\r",
+							"            \"email\",\r",
+							"            \"macId\",\r",
+							"            \"transactionId\",\r",
+							"            \"charges\",\r",
+							"            \"updatedBy\",\r",
+							"            \"status\",\r",
+							"            \"mobile\",\r",
+							"            \"otpIssuedTime\",\r",
+							"            \"otpExpiryTime\",\r",
+							"            \"otp\",\r",
+							"            \"nasid\",\r",
+							"            \"createdBy\",\r",
+							"            \"id\",\r",
+							"            \"selectedPlanId\",\r",
+							"            \"deviceAllowed\",\r",
+							"            \"dataPlan\",\r",
+							"            \"timePlan\"\r",
+							"          ]\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\"wgStatus\", \"wgPolicy\", \"plan\", \"fdmUser\"]\r",
+							"    },\r",
+							"    \"settings\": { \"type\": [\"null\", \"object\"] }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "594ddd1c-5239-4895-8856-a5362f692480",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid=482941&mobile=1111169238&deviceId=qa_28&planId=14704",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"GetWgPolicy_V2"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "482941"
+						},
+						{
+							"key": "mobile",
+							"value": "1111169238"
+						},
+						{
+							"key": "deviceId",
+							"value": "qa_28"
+						},
+						{
+							"key": "planId",
+							"value": "14704"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "FetchUserOnSignal",
 			"event": [
 				{
