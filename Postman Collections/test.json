@@ -1,0 +1,1909 @@
+{
+	"info": {
+		"_postman_id": "dcb7ba2f-1da8-433a-932a-338be490e6fd",
+		"name": "MV-Customer-all apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetWgPolicy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b92ce86e-5b7b-4922-a7d0-ddb80360fa3d",
+						"exec": [
+							"\r",
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": { \"type\": \"integer\" },\r",
+							"    \"msg\": { \"type\": \"string\" },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"wgStatus\": { \"type\": \"string\" },\r",
+							"        \"wgPolicy\": { \"type\": \"object\" },\r",
+							"        \"plan\": { \"type\": [\"null\", \"string\", \"object\"] }, // Updated here to allow 'object'\r",
+							"        \"fdmUser\": {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"            \"extraDataObject\": {\r",
+							"              \"type\": \"object\",\r",
+							"              \"properties\": {\r",
+							"                \"speed\": { \"type\": \"integer\" },\r",
+							"                \"totalPaid\": { \"type\": [\"null\", \"number\"] }\r",
+							"              },\r",
+							"              \"required\": [\"speed\", \"totalPaid\"]\r",
+							"            },\r",
+							"            \"createdOn\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+							"            \"name\": { \"type\": \"string\" },\r",
+							"            \"storeGroupId\": { \"type\": \"string\" },\r",
+							"            \"email\": { \"type\": \"string\" },\r",
+							"            \"macId\": { \"type\": \"string\" },\r",
+							"            \"transactionId\": { \"type\": [\"null\", \"string\"] },\r",
+							"            \"charges\": { \"type\": [\"null\", \"number\"] },\r",
+							"            \"updatedBy\": { \"type\": \"string\" },\r",
+							"            \"status\": { \"type\": \"string\" },\r",
+							"            \"mobile\": { \"type\": [\"null\", \"string\"] },\r",
+							"            \"otpIssuedTime\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+							"            \"otpExpiryTime\": { \"type\": \"string\", \"format\": \"date-time\" },\r",
+							"            \"otp\": { \"type\": [\"null\", \"string\"] },\r",
+							"            \"nasid\": { \"type\": [\"null\", \"integer\"] },\r",
+							"            \"createdBy\": { \"type\": [\"null\", \"integer\"] },\r",
+							"            \"id\": { \"type\": \"integer\" },\r",
+							"            \"selectedPlanId\": { \"type\": \"integer\" },\r",
+							"            \"deviceAllowed\": { \"type\": \"integer\" },\r",
+							"            \"dataPlan\": { \"type\": \"integer\" },\r",
+							"            \"timePlan\": { \"type\": \"integer\" }\r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \"extraDataObject\",\r",
+							"            \"createdOn\",\r",
+							"            \"name\",\r",
+							"            \"storeGroupId\",\r",
+							"            \"email\",\r",
+							"            \"macId\",\r",
+							"            \"transactionId\",\r",
+							"            \"charges\",\r",
+							"            \"updatedBy\",\r",
+							"            \"status\",\r",
+							"            \"mobile\",\r",
+							"            \"otpIssuedTime\",\r",
+							"            \"otpExpiryTime\",\r",
+							"            \"otp\",\r",
+							"            \"nasid\",\r",
+							"            \"createdBy\",\r",
+							"            \"id\",\r",
+							"            \"selectedPlanId\",\r",
+							"            \"deviceAllowed\",\r",
+							"            \"dataPlan\",\r",
+							"            \"timePlan\"\r",
+							"          ]\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\"wgStatus\", \"wgPolicy\", \"plan\", \"fdmUser\"]\r",
+							"    },\r",
+							"    \"settings\": { \"type\": [\"null\", \"object\"] }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "d3c9a9f8-f643-4f8d-af2c-819fa26900d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid=482941&mobile=1111169238&deviceId=qa_28&planId=14704",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"GetWgPolicy_V2"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "482941"
+						},
+						{
+							"key": "mobile",
+							"value": "1111169238"
+						},
+						{
+							"key": "deviceId",
+							"value": "qa_28"
+						},
+						{
+							"key": "planId",
+							"value": "14704"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchUserOnSignal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f5f14a5-0c09-4b88-84a4-0132ce627411",
+						"exec": [
+							"const schema={\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"errorCode\":{\r",
+							"            \"type\" : \"string\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"            \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"msg\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"data\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"userid\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"username\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"token\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"email\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"password\": {\r",
+							"                    \"type\": [\"null\", \"string\"]\r",
+							"                },\r",
+							"                \"contact_no\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"aadhar\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"authType\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"userType\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"email_verified\": {\r",
+							"                    \"type\": \"boolean\"\r",
+							"                },\r",
+							"                \"is_password_temporary\": {\r",
+							"                    \"type\": \"boolean\"\r",
+							"                },\r",
+							"                \"name\": {\r",
+							"                    \"type\": \"string\"\r",
+							"                },\r",
+							"                \"features\": {\r",
+							"                    \"type\": [\"null\", \"array\"]\r",
+							"                },\r",
+							"                \"parentAdminUserId\": {\r",
+							"                    \"type\": [\"null\", \"integer\"]\r",
+							"                },\r",
+							"                \"parent\": {\r",
+							"                    \"type\": [\"null\", \"string\"]\r",
+							"                },\r",
+							"                \"product\": {\r",
+							"                    \"type\": [\"null\", \"string\"]\r",
+							"                },\r",
+							"                \"partnerId\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"clientId\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"active\": {\r",
+							"                    \"type\": \"integer\"\r",
+							"                },\r",
+							"                \"tokengenratedtime\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"format\": \"date-time\"\r",
+							"                },\r",
+							"                \"picture\": {\r",
+							"                    \"type\": [\"null\", \"string\"]\r",
+							"                },\r",
+							"                \"given_name\": {\r",
+							"                    \"type\": [\"null\", \"string\"]\r",
+							"                },\r",
+							"                \"family_name\": {\r",
+							"                    \"type\": [\"null\", \"string\"]\r",
+							"                },\r",
+							"                \"extraData\": {\r",
+							"                    \"type\": \"object\"\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\r",
+							"                \"userid\",\r",
+							"                \"username\",\r",
+							"                \"token\",\r",
+							"                \"email\",\r",
+							"                \"password\",\r",
+							"                \"contact_no\",\r",
+							"                \"aadhar\",\r",
+							"                \"authType\",\r",
+							"                \"userType\",\r",
+							"                \"email_verified\",\r",
+							"                \"is_password_temporary\",\r",
+							"                \"name\",\r",
+							"                \"features\",\r",
+							"                \"parentAdminUserId\",\r",
+							"                \"parent\",\r",
+							"                \"product\",\r",
+							"                \"partnerId\",\r",
+							"                \"clientId\",\r",
+							"                \"active\",\r",
+							"                \"tokengenratedtime\",\r",
+							"                \"picture\",\r",
+							"                \"given_name\",\r",
+							"                \"family_name\",\r",
+							"                \"extraData\"\r",
+							"            ]\r",
+							"        },\r",
+							"        \"settings\": {\r",
+							"            \"type\": [\"null\", \"object\"]\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "3ab22321-c6ef-479a-8ebd-403644885b1d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/Auth/FetchUserOnSignal?userSsid=1111169237&signalToken=902af4e8-8c54-4948-a537-3453212f510b&mac=F2:FF:FF:FF:FF:1D",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"Auth",
+						"FetchUserOnSignal"
+					],
+					"query": [
+						{
+							"key": "userSsid",
+							"value": "1111169237"
+						},
+						{
+							"key": "signalToken",
+							"value": "902af4e8-8c54-4948-a537-3453212f510b"
+						},
+						{
+							"key": "mac",
+							"value": "F2:FF:FF:FF:FF:1D"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCoupon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5fd2fecd-1f11-4e67-beb6-5aa7593b77c9",
+						"exec": [
+							"const schema = {\r",
+							"  type: \"object\",\r",
+							"  properties: {\r",
+							"    status: { type: \"integer\" },\r",
+							"    msg: { type: \"string\" },\r",
+							"    settings: { type: [\"null\", \"object\"] }, // settings field can be null or an object\r",
+							"    data: {\r",
+							"      type: \"array\", // data is an array\r",
+							"      items: { // defining the structure of each object in the array\r",
+							"        type: \"object\",\r",
+							"        properties: {\r",
+							"          blueprint_id: { type: \"integer\" },\r",
+							"          account_id: { type: \"integer\" },\r",
+							"          used_count: { type: \"integer\" },\r",
+							"          issued_time: { type: \"string\", format: \"date-time\" },\r",
+							"          expiry_time: { type: \"string\", format: \"date-time\" },\r",
+							"          shareStatus: { type: [\"null\", \"string\"] }, // shareStatus can be null or a string\r",
+							"          sharedBy: { type: [\"null\", \"string\"] }, // sharedBy can be null or a string\r",
+							"          id: { type: \"integer\" },\r",
+							"          amount: { type: \"integer\" },\r",
+							"          name: { type: [\"null\", \"string\"] }, // name can be null or a string\r",
+							"          coupon_type: { type: \"string\" },\r",
+							"          vaildity_days: { type: \"integer\" },\r",
+							"          discount: { type: \"integer\" },\r",
+							"          frequency: { type: \"integer\" },\r",
+							"          coupon_code: { type: \"string\" },\r",
+							"          extra_data: { // extra_data is an object with specific fields\r",
+							"            type: \"object\",\r",
+							"            properties: {\r",
+							"              percentage: { type: \"integer\" },\r",
+							"              coupon_type: { type: \"string\" },\r",
+							"              discount: { type: \"integer\" }\r",
+							"            },\r",
+							"            required: [\"percentage\", \"coupon_type\", \"discount\"] // all fields are required within extra_data\r",
+							"          }\r",
+							"        },\r",
+							"        required: [\r",
+							"          \"blueprint_id\", \"account_id\", \"used_count\", \"issued_time\", \"expiry_time\",\r",
+							"          \"shareStatus\", \"sharedBy\", \"id\", \"amount\", \"name\", \"coupon_type\", \"vaildity_days\",\r",
+							"          \"discount\", \"frequency\", \"coupon_code\", \"extra_data\"\r",
+							"        ]\r",
+							"      }\r",
+							"    }\r",
+							"  },\r",
+							"  required: [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "729537f9-a162-4900-b47c-5d000fcfbb45",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/Coupon/GetCoupon?accountId=274878008350",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"Coupon",
+						"GetCoupon"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "274878008350"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FetchNasUsageV2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "630dd8f1-2772-49d3-ae3f-a1ed288c86f5",
+						"exec": [
+							"const schema = {\r",
+							"    type: \"object\",\r",
+							"    properties: {\r",
+							"        status: { type: \"integer\" },\r",
+							"        msg: { type: \"string\" },\r",
+							"        settings: { type: [\"null\", \"array\"] }, // settings can be either null or an array\r",
+							"        data: { type: \"number\" } // data is a number (double)\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "c0279c33-d11e-4d68-9b2a-cc90d1666373",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/reports/FetchNasUsageV2?nasid=16114&fromDate=2025-02-01%2000%3A00%3A00.000&toDate=2025-02-04%2000%3A00%3A00.000",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"reports",
+						"FetchNasUsageV2"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "16114"
+						},
+						{
+							"key": "fromDate",
+							"value": "2025-02-01%2000%3A00%3A00.000"
+						},
+						{
+							"key": "toDate",
+							"value": "2025-02-04%2000%3A00%3A00.000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SetServer10",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb529e0e-cc06-4552-8699-b108dbddcb01",
+						"exec": [
+							"const schema ={\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"status\": { \"type\": \"integer\" },\r",
+							"        \"msg\": { \"type\": \"string\" },\r",
+							"        \"settings\": { \"type\": [\"null\", \"object\"] },\r",
+							"        \"data\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"GLOBALLY_ACTIVE_PLAN_SETTINGS\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": { \"type\": \"integer\" }\r",
+							"                },\r",
+							"                \"BOOKING_FEE\": { \"type\": \"number\" },\r",
+							"                \"appDownloadLink\": { \"type\": \"string\" },\r",
+							"                \"latestAppVersion\": { \"type\": \"string\" },\r",
+							"                \"AUTOPAY_DISCOUNT_LIST\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": { \"type\": \"integer\" }\r",
+							"                },\r",
+							"                \"AUTOPAY_DISCOUNT_LIST_V3\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": { \"type\": \"integer\" }\r",
+							"                },\r",
+							"                \"BOOKING_SERVICE_CHARGE\": { \"type\": \"number\" },\r",
+							"                \"isAdvertisingIdKnown\": { \"type\": \"boolean\" },\r",
+							"                \"LATEST_LANGUAGE_PUBLISH_TIME\": { \"type\": \"string\" },\r",
+							"                \"booking_scenario\": { \"type\": \"string\" },\r",
+							"                \"GLOBALLY_ACTIVE_PLANS\": {\r",
+							"                    \"type\": \"array\",\r",
+							"                    \"items\": {\r",
+							"                        \"type\": \"object\",\r",
+							"                        \"properties\": {\r",
+							"                            \"extraData\": {\r",
+							"                                \"type\": \"object\",\r",
+							"                                \"properties\": {\r",
+							"                                    \"isp_charges\": { \"type\": \"integer\" },\r",
+							"                                    \"router_rent\": { \"type\": \"integer\" },\r",
+							"                                    \"pdoa_charges\": { \"type\": \"integer\" },\r",
+							"                                    \"pm_wani_discount\": { \"type\": \"integer\" }\r",
+							"                                }\r",
+							"                            },\r",
+							"                            \"id\": { \"type\": \"integer\" },\r",
+							"                            \"combined_setting_id\": { \"type\": \"integer\" },\r",
+							"                            \"name\": { \"type\": \"string\" },\r",
+							"                            \"time_limit\": { \"type\": \"integer\" },\r",
+							"                            \"data_limit\": { \"type\": \"integer\" },\r",
+							"                            \"speed_limit_mbps\": { \"type\": \"integer\" },\r",
+							"                            \"price\": { \"type\": \"number\" },\r",
+							"                            \"discount\": { \"type\": \"integer\" },\r",
+							"                            \"active\": { \"type\": \"boolean\" },\r",
+							"                            \"concurrent_devices\": { \"type\": \"integer\" },\r",
+							"                            \"costPrice\": { \"type\": \"number\" },\r",
+							"                            \"planCode\": { \"type\": \"string\" },\r",
+							"                            \"offering\": { \"type\": \"string\" },\r",
+							"                            \"subscriptionDiscount\": { \"type\": \"integer\" }\r",
+							"                        }\r",
+							"                    }\r",
+							"                },\r",
+							"                \"CUSTOMER_QUEUE\": { \"type\": \"string\" },\r",
+							"                \"SignalToken\": { \"type\": \"string\" }\r",
+							"            },\r",
+							"            \"required\": [\r",
+							"                \"GLOBALLY_ACTIVE_PLAN_SETTINGS\",\r",
+							"                \"BOOKING_FEE\",\r",
+							"                \"GLOBALLY_ACTIVE_PLANS\",\r",
+							"                \"CUSTOMER_QUEUE\",\r",
+							"                \"SignalToken\"\r",
+							"            ]\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [\"status\", \"msg\", \"data\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "0b97fff8-311b-4306-b1b3-055207ecd56c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-agent",
+						"value": "Dart/3.4 (dart:io)"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip"
+					},
+					{
+						"key": "cookie",
+						"value": "JWT_TOKEN=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyNjI0OGI3LWIyZmQtNDk4MS1iMDE0LTE0NDUwOTNiMjQ0NCIsInVzZXJJZCI6IjEzNzQzOTA3NTM1MCIsIm1vYmlsZSI6IjExMTExNTA3NTYiLCJ3bF90b2tlbiI6IjRhMzg4NzQwLTZmNTMtNDY2Ny04NjA3LTk1MTUxMDg1OWIxMiIsImxvZ2luTmFtZSI6IiIsImFkbWluSWQiOiIxMzc0MzkwNzUzNTAiLCJpMmUxX2FkbWluX3Rva2VuIjoiNGEzODg3NDAtNmY1My00NjY3LTg2MDctOTUxNTEwODU5YjEyIiwidXNlclR5cGUiOiJTVEFOREFSRCIsImZlYXR1cmVzIjoibnVsbCIsImFkbWluRXh0cmFEYXRhIjoie30iLCJlbWFpbCI6IiIsInVzZXJuYW1lIjoiMTExMTE1MDc1NiIsImFkbWluTmFtZSI6IiIsIm5iZiI6MTczNTg4Nzg0MiwiZXhwIjoxNzM1OTc0MjQyLCJpYXQiOjE3MzU4ODc4NDJ9.ZYfDlLz-xMcDFHj6WX6EzMaiopVn9Z7TenDfdcdsiU5SJnMcxyLflXXD-z0WzZOk0m2nNCuGkBkKB1AD-TlCvw;a=b"
+					},
+					{
+						"key": "content-length",
+						"value": "0"
+					},
+					{
+						"key": "host",
+						"value": "customer.qa.i2e1.in"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "jwt_token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgyNjI0OGI3LWIyZmQtNDk4MS1iMDE0LTE0NDUwOTNiMjQ0NCIsInVzZXJJZCI6IjEzNzQzOTA3NTM1MCIsIm1vYmlsZSI6IjExMTExNTA3NTYiLCJ3bF90b2tlbiI6IjRhMzg4NzQwLTZmNTMtNDY2Ny04NjA3LTk1MTUxMDg1OWIxMiIsImxvZ2luTmFtZSI6IiIsImFkbWluSWQiOiIxMzc0MzkwNzUzNTAiLCJpMmUxX2FkbWluX3Rva2VuIjoiNGEzODg3NDAtNmY1My00NjY3LTg2MDctOTUxNTEwODU5YjEyIiwidXNlclR5cGUiOiJTVEFOREFSRCIsImZlYXR1cmVzIjoibnVsbCIsImFkbWluRXh0cmFEYXRhIjoie30iLCJlbWFpbCI6IiIsInVzZXJuYW1lIjoiMTExMTE1MDc1NiIsImFkbWluTmFtZSI6IiIsIm5iZiI6MTczNTg4Nzg0MiwiZXhwIjoxNzM1OTc0MjQyLCJpYXQiOjE3MzU4ODc4NDJ9.ZYfDlLz-xMcDFHj6WX6EzMaiopVn9Z7TenDfdcdsiU5SJnMcxyLflXXD-z0WzZOk0m2nNCuGkBkKB1AD-TlCvw"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/SetServer10?appName=HOME_ROUTER&appVersion=9999&advertisingId=3660ef75-d777-4ece-8b7d-7ef9b363a145&fcmToken=eFMkhBTPSKm8P8mS3UfyaH:APA91bEeWnqBwbKsr41bNGLnZTHevzhzBAA3-4901u7HivrVXxIUDE9y0uTpqSs3T66ncCbr4tZNEAW_edYdpeXKkbzSdKlfDaH7jtXGfggLt9cRY8SBjIA",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"SetServer10"
+					],
+					"query": [
+						{
+							"key": "appName",
+							"value": "HOME_ROUTER"
+						},
+						{
+							"key": "appVersion",
+							"value": "9999"
+						},
+						{
+							"key": "advertisingId",
+							"value": "3660ef75-d777-4ece-8b7d-7ef9b363a145"
+						},
+						{
+							"key": "fcmToken",
+							"value": "eFMkhBTPSKm8P8mS3UfyaH:APA91bEeWnqBwbKsr41bNGLnZTHevzhzBAA3-4901u7HivrVXxIUDE9y0uTpqSs3T66ncCbr4tZNEAW_edYdpeXKkbzSdKlfDaH7jtXGfggLt9cRY8SBjIA"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginSignal",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5f9a36bc-6ecd-4c73-ac60-36cc5c8d32b8",
+						"exec": [
+							"const schema={\r",
+							"    \"type\": \"object\",\r",
+							"    \"properties\": {\r",
+							"        \"status\": {\r",
+							"            \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"msg\": {\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"settings\": {\r",
+							"            \"type\": [\"null\", \"object\"]\r",
+							"        },\r",
+							"        \"data\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"                \"loginUser\": {\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"properties\": {\r",
+							"                        \"id\": { \"type\": \"integer\" },\r",
+							"                        \"mobile\": { \"type\": \"string\" },\r",
+							"                        \"name\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"otp\": { \"type\": \"string\" },\r",
+							"                        \"token\": { \"type\": \"string\" },\r",
+							"                        \"fcmToken\": { \"type\": \"string\" }\r",
+							"                    },\r",
+							"                    \"required\": [\"id\", \"mobile\", \"otp\", \"token\", \"fcmToken\"]\r",
+							"                },\r",
+							"                \"adminUser\": {\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"properties\": {\r",
+							"                        \"userid\": { \"type\": \"integer\" },\r",
+							"                        \"username\": { \"type\": \"string\" },\r",
+							"                        \"token\": { \"type\": \"string\" },\r",
+							"                        \"email\": { \"type\": \"string\" },\r",
+							"                        \"password\": { \"type\": \"string\" },\r",
+							"                        \"contact_no\": { \"type\": \"string\" },\r",
+							"                        \"aadhar\": { \"type\": \"string\" },\r",
+							"                        \"authType\": { \"type\": \"integer\" },\r",
+							"                        \"userType\": { \"type\": \"integer\" },\r",
+							"                        \"email_verified\": { \"type\": \"boolean\" },\r",
+							"                        \"is_password_temporary\": { \"type\": \"boolean\" },\r",
+							"                        \"name\": { \"type\": \"string\" },\r",
+							"                        \"features\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"parentAdminUserId\": { \"type\": [\"null\", \"integer\"] },\r",
+							"                        \"parent\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"product\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"partnerId\": { \"type\": \"integer\" },\r",
+							"                        \"clientId\": { \"type\": \"integer\" },\r",
+							"                        \"active\": { \"type\": \"integer\" },\r",
+							"                        \"tokengenratedtime\": { \"type\": \"string\" },\r",
+							"                        \"picture\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"given_name\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"family_name\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"extraData\": { \"type\": \"object\" }\r",
+							"                    },\r",
+							"                    \"required\": [\"userid\", \"username\", \"token\", \"email\", \"password\", \"contact_no\"]\r",
+							"                },\r",
+							"                \"account\": {\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"properties\": {\r",
+							"                        \"name\": { \"type\": \"string\" },\r",
+							"                        \"email\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"pan\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"addedTime\": { \"type\": \"string\" },\r",
+							"                        \"id\": { \"type\": \"integer\" },\r",
+							"                        \"rdAccountId\": { \"type\": \"integer\" },\r",
+							"                        \"consumerNo\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"gst\": { \"type\": \"string\" },\r",
+							"                        \"balance\": { \"type\": \"number\" },\r",
+							"                        \"address\": { \"type\": \"string\" },\r",
+							"                        \"googleAddressId\": { \"type\": \"integer\" },\r",
+							"                        \"aadhar\": { \"type\": [\"null\", \"string\"] },\r",
+							"                        \"applications\": { \"type\": \"object\" },\r",
+							"                        \"extraData\": { \"type\": \"string\" },\r",
+							"                        \"extraDataObject\": { \"type\": \"object\" },\r",
+							"                        \"logicalGroup\": { \"type\": \"string\" },\r",
+							"                        \"options\": { \"type\": \"object\" },\r",
+							"                        \"version\": { \"type\": [\"null\", \"string\"] }\r",
+							"                    },\r",
+							"                    \"required\": [\"name\", \"addedTime\", \"id\", \"rdAccountId\", \"balance\", \"address\"]\r",
+							"                },\r",
+							"                \"jwtToken\": {\r",
+							"                    \"type\": \"object\",\r",
+							"                    \"properties\": {\r",
+							"                        \"token\": { \"type\": \"string\" },\r",
+							"                        \"refreshToken\": { \"type\": [\"null\", \"string\"] }\r",
+							"                    },\r",
+							"                    \"required\": [\"token\"]\r",
+							"                }\r",
+							"            },\r",
+							"            \"required\": [\"loginUser\", \"adminUser\", \"account\", \"jwtToken\"]\r",
+							"        }\r",
+							"    },\r",
+							"    \"required\": [\"status\", \"msg\", \"settings\", \"data\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "12af86de-4c4a-4508-be14-9bb1416a0d72",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "user-agent",
+						"value": "Dart/3.4 (dart:io)"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json; charset=utf-8"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip"
+					},
+					{
+						"key": "content-length",
+						"value": "143"
+					},
+					{
+						"key": "host",
+						"value": "customer.qa.i2e1.in"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userSsid\":\"1111169237\",\"ssidPass\":\"12345678\",\"fcmToken\":\"BY_PASS\",\"appVersion\":\"9999\",\"advertisingId\":\"12f363a0-f1a9-4b7f-9a1e-54429cdac42f\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{scheme}}{{domain_customer}}/customer/Auth/LoginSignal"
+			},
+			"response": []
+		},
+		{
+			"name": "ShareCoupon",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a6f3537-bb23-47d2-ad02-9093de1dd7f6",
+						"exec": [
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\"\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": \"null\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "22062f46-fc39-473d-9ae0-6ad92c4bc3e8",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"couponId\":1735215640572,\r\n    \"shareToMobile\":2769696965\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{scheme}}{{domain_customer}}/customer/Coupon/ShareCoupon"
+			},
+			"response": []
+		},
+		{
+			"name": "GetPlansOnNas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "52c81ef9-279a-4c8e-96b9-0c5b01eec66c",
+						"exec": [
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": [\"null\", \"object\"]\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": {\r",
+							"        \"type\": \"object\",\r",
+							"        \"properties\": {\r",
+							"          \"extraData\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"properties\": {\r",
+							"              \"isp_charges\": { \"type\": \"integer\" },\r",
+							"              \"router_rent\": { \"type\": \"integer\" },\r",
+							"              \"pdoa_charges\": { \"type\": \"integer\" },\r",
+							"              \"pm_wani_discount\": { \"type\": \"integer\" }\r",
+							"            },\r",
+							"            \"required\": [\"isp_charges\", \"router_rent\", \"pdoa_charges\", \"pm_wani_discount\"]\r",
+							"          },\r",
+							"          \"id\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"combined_setting_id\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"name\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"time_limit\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"data_limit\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"speed_limit_mbps\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"price\": {\r",
+							"            \"type\": \"number\"\r",
+							"          },\r",
+							"          \"discount\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"active\": {\r",
+							"            \"type\": \"boolean\"\r",
+							"          },\r",
+							"          \"concurrent_devices\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          },\r",
+							"          \"costPrice\": {\r",
+							"            \"type\": \"number\"\r",
+							"          },\r",
+							"          \"planCode\": {\r",
+							"            \"type\": \"string\"\r",
+							"          },\r",
+							"          \"offering\": {\r",
+							"            \"type\": \"string\"\r",
+							"          },\r",
+							"          \"subscriptionDiscount\": {\r",
+							"            \"type\": \"integer\"\r",
+							"          }\r",
+							"        },\r",
+							"        \"required\": [\r",
+							"          \"extraData\", \"id\", \"combined_setting_id\", \"name\", \"time_limit\", \r",
+							"          \"data_limit\", \"speed_limit_mbps\", \"price\", \"discount\", \"active\", \r",
+							"          \"concurrent_devices\", \"costPrice\", \"planCode\", \"offering\", \"subscriptionDiscount\"\r",
+							"        ]\r",
+							"      }\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"settings\", \"data\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "8ab61355-e057-4f09-acfc-b44780903b9a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetPlansOnNas?nasid=482929&getDiscountedPlans=true",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"GetPlansOnNas"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "482929"
+						},
+						{
+							"key": "getDiscountedPlans",
+							"value": "true"
+						},
+						{
+							"key": "",
+							"value": null,
+							"type": "text",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSSIDPassword",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9527b8b4-abf1-4b56-9943-9adc3e1227c1",
+						"exec": [
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"boolean\"\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": \"null\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "2b0e1e44-98dc-4489-8434-4cd15d6999d1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/UpdateSSIDandPassword?nasid=482929&ssid=2769696965&password=12345678&onlyPassUpdate=true",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"UpdateSSIDandPassword"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "482929"
+						},
+						{
+							"key": "ssid",
+							"value": "2769696965"
+						},
+						{
+							"key": "password",
+							"value": "12345678"
+						},
+						{
+							"key": "onlyPassUpdate",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpgradePlan",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f053b8a-9679-4015-a6da-b97b0e502d70",
+						"exec": [
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": \"null\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "5e6c7605-f572-4561-8a43-29493647a6a0",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/UpgradePlan?nasid=33557&appVersion=1",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"UpgradePlan"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "33557"
+						},
+						{
+							"key": "appVersion",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ScheduleJobCancelMandate",
+			"id": "242c0abc-99c9-46c6-8c78-bf776219e0ad",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/ScheduleJobCancelMandate?mobile=123456&reasons=123456",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"ScheduleJobCancelMandate"
+					],
+					"query": [
+						{
+							"key": "mobile",
+							"value": "123456"
+						},
+						{
+							"key": "reasons",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteJobCancelMandate",
+			"id": "caa711d1-1a3d-4567-8b41-7e437bc2508d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/DeleteJobCancelMandate?mobile=123456",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"DeleteJobCancelMandate"
+					],
+					"query": [
+						{
+							"key": "mobile",
+							"value": "123456"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RescheduleAutopay",
+			"id": "ccfe6e73-f385-450a-b438-10a50a5f5d0b",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile=1234&rescheduleDate=12345",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"RescheduleAutopay"
+					],
+					"query": [
+						{
+							"key": "mobile",
+							"value": "1234"
+						},
+						{
+							"key": "rescheduleDate",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CheckCustomerList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "19c581c7-78d9-40d2-a9b0-4e01a0ce7ec5",
+						"exec": [
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": {\r",
+							"        \"type\": \"string\"\r",
+							"      }\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": \"null\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "363e9d9c-8f02-4647-ba57-ec8e700b9324",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/CheckCustomerList?mobiles=9999451019",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"CheckCustomerList"
+					],
+					"query": [
+						{
+							"key": "mobiles",
+							"value": "9999451019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetNewWiomBenefits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13392447-1afb-4275-9ff9-52a62a83d117",
+						"exec": [
+							"\r",
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"onlineBenefits\": { \"type\": \"integer\" },\r",
+							"        \"autopayBenefit\": { \"type\": \"integer\" },\r",
+							"        \"restartFeeBenefit\": { \"type\": \"integer\" },\r",
+							"        \"mobileRechargeBenefits\": { \"type\": \"integer\" },\r",
+							"        \"restartFeeDays\": { \"type\": \"integer\" }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"onlineBenefits\",\r",
+							"        \"autopayBenefit\",\r",
+							"        \"restartFeeBenefit\",\r",
+							"        \"mobileRechargeBenefits\",\r",
+							"        \"restartFeeDays\"\r",
+							"      ]\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": \"null\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "a5c4060f-3dc9-41e4-bda7-ec2f05fc41a7",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetNewWiomBenefits?accountId=274877924388",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"GetNewWiomBenefits"
+					],
+					"query": [
+						{
+							"key": "accountId",
+							"value": "274877924388"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StoreContacts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c7f0901-6820-4c0d-a598-a5648b05c1c6",
+						"exec": [
+							"const schema = {\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"status\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"msg\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        // No properties are required for data in this case, making it an empty object.\r",
+							"      },\r",
+							"      \"additionalProperties\": true // Allowing additional properties in the object, even if it's empty.\r",
+							"    },\r",
+							"    \"settings\": {\r",
+							"      \"type\": \"null\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
+							"};\r",
+							"\r",
+							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    // Run the validation using the compareObjects function\r",
+							"    const errors = myPackage.compareObjects(schema,jsonData);\r",
+							"    \r",
+							"    if (errors.length > 0) {\r",
+							"        // Print each error as a separate test case\r",
+							"        errors.forEach(error => {\r",
+							"            pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                pm.expect(false, error).to.be.true;\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.expect(errors).to.be.empty;\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {
+							"@blue22-2976/customfunc": {
+								"id": "01943ba5-3ab5-7fa3-a8cb-94ca1c674e65"
+							}
+						}
+					}
+				}
+			],
+			"id": "724f9873-f792-48b3-a6eb-27e6b6b3042d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}{{domain_customer}}/customer/StoreContacts?additionalProp1=string&additionalProp2=string&additionalProp3=string&mobile=2769696965",
+					"host": [
+						"{{scheme}}{{domain_customer}}"
+					],
+					"path": [
+						"customer",
+						"StoreContacts"
+					],
+					"query": [
+						{
+							"key": "additionalProp1",
+							"value": "string"
+						},
+						{
+							"key": "additionalProp2",
+							"value": "string"
+						},
+						{
+							"key": "additionalProp3",
+							"value": "string"
+						},
+						{
+							"key": "mobile",
+							"value": "2769696965"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d7767d92-d414-4645-98e6-7394a148ee87",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Store the function as a string\r",
+					"pm.globals.set(\"compareObjectsStr\", `\r",
+					"function compareObjects(schema, data, path = '') {\r",
+					"    // Guard against undefined/null schema\r",
+					"    if (!schema || typeof schema !== 'object') {\r",
+					"        return ['Invalid schema: schema must be an object'];\r",
+					"    }\r",
+					"\r",
+					"    const errors = [];\r",
+					"    \r",
+					"    // Handle root level validation\r",
+					"    if (!schema.type || schema.type !== 'object') {\r",
+					"        errors.push('Root schema must be of type object');\r",
+					"        return errors;\r",
+					"    }\r",
+					"\r",
+					"    // Guard against undefined properties\r",
+					"    if (!schema.properties || typeof schema.properties !== 'object') {\r",
+					"        errors.push('Schema must have properties defined');\r",
+					"        return errors;\r",
+					"    }\r",
+					"\r",
+					"    // Guard against undefined/null data\r",
+					"    if (!data || typeof data !== 'object') {\r",
+					"        errors.push('Invalid data: data must be an object');\r",
+					"        return errors;\r",
+					"    }\r",
+					"\r",
+					"    // Check for all defined fields in schema (whether required or not)\r",
+					"    Object.keys(schema.properties).forEach(key => {\r",
+					"        if (!(key in data)) {\r",
+					"            errors.push(\\`Missing field: \\${path}\\${key}\\`);\r",
+					"            return;\r",
+					"        }\r",
+					"    });\r",
+					"\r",
+					"    // Check for extra fields in data that aren't in schema\r",
+					"    Object.keys(data).forEach(key => {\r",
+					"        if (!schema.properties[key]) {\r",
+					"            errors.push(\\`Extra field found at \\${path}\\${key}\\`);\r",
+					"        }\r",
+					"    });\r",
+					"    \r",
+					"    // Check field types and nested validation\r",
+					"    Object.keys(schema.properties).forEach(key => {\r",
+					"        const currentPath = path ? \\`\\${path}\\${key}\\` : key;\r",
+					"        const schemaProperty = schema.properties[key];\r",
+					"        const value = data[key];\r",
+					"        \r",
+					"        // Guard against invalid schema property\r",
+					"        if (!schemaProperty || !schemaProperty.type) {\r",
+					"            errors.push(\\`Invalid schema property at \\${currentPath}: missing type definition\\`);\r",
+					"            return;\r",
+					"        }\r",
+					"\r",
+					"        // Skip if field is missing (already reported above)\r",
+					"        if (!(key in data)) {\r",
+					"            return;\r",
+					"        }\r",
+					"\r",
+					"        const schemaType = schemaProperty.type;\r",
+					"        \r",
+					"        // Handle null values for union types\r",
+					"        if (Array.isArray(schemaType)) {\r",
+					"            // Check if null is allowed in union type\r",
+					"            const allowsNull = schemaType.includes('null');\r",
+					"            if (value === null && !allowsNull) {\r",
+					"                errors.push(\\`Null value not allowed at \\${currentPath}\\`);\r",
+					"            } else if (value !== null && !schemaType.some(type =>\r",
+					"                type !== 'null' && (\r",
+					"                    type === typeof value ||\r",
+					"                    (type === 'integer' && Number.isInteger(value)) ||\r",
+					"                    (type === 'number' && typeof value === 'number')\r",
+					"                ))) {\r",
+					"                errors.push(\\`Type mismatch at \\${currentPath}: expected one of [\\${schemaType.join(', ')}], got \\${value === null ? 'null' : typeof value}\\`);\r",
+					"            }\r",
+					"        }\r",
+					"        // Handle nested objects\r",
+					"        else if (schemaType === 'object') {\r",
+					"            if (value === null) {\r",
+					"                errors.push(\\`Null value not allowed for object type at \\${currentPath}\\`);\r",
+					"            } else if (typeof value !== 'object') {\r",
+					"                errors.push(\\`Type mismatch at \\${currentPath}: expected object, got \\${typeof value}\\`);\r",
+					"            } else if (schemaProperty.properties) {\r",
+					"                errors.push(...compareObjects({\r",
+					"                    type: 'object',\r",
+					"                    properties: schemaProperty.properties,\r",
+					"                    required: schemaProperty.required\r",
+					"                }, value, \\`\\${currentPath}.\\`));\r",
+					"            }\r",
+					"        }\r",
+					"        // Handle arrays\r",
+					"        else if (schemaType === 'array') {\r",
+					"            if (value === null) {\r",
+					"                errors.push(\\`Null value not allowed for array type at \\${currentPath}\\`);\r",
+					"            } else if (!Array.isArray(value)) {\r",
+					"                errors.push(\\`Type mismatch at \\${currentPath}: expected array, got \\${typeof value}\\`);\r",
+					"            } else if (schemaProperty.items) {\r",
+					"                value.forEach((item, index) => {\r",
+					"                    const itemType = schemaProperty.items.type;\r",
+					"                    if (item === null) {\r",
+					"                        errors.push(\\`Null value not allowed in array at \\${currentPath}[\\${index}]\\`);\r",
+					"                    } else if (typeof item !== itemType &&\r",
+					"                        !(itemType === 'integer' && Number.isInteger(item)) &&\r",
+					"                        !(itemType === 'number' && typeof item === 'number')) {\r",
+					"                        errors.push(\\`Type mismatch at \\${currentPath}[\\${index}]: expected \\${itemType}, got \\${typeof item}\\`);\r",
+					"                    }\r",
+					"                });\r",
+					"            }\r",
+					"        }\r",
+					"        // Handle primitive types\r",
+					"        else {\r",
+					"            if (value === null) {\r",
+					"                errors.push(\\`Null value not allowed at \\${currentPath}\\`);\r",
+					"            } else {\r",
+					"                const actualType = typeof value;\r",
+					"                if (schemaType === 'integer' && !Number.isInteger(value)) {\r",
+					"                    errors.push(\\`Type mismatch at \\${currentPath}: expected integer, got \\${actualType} with value \\${value}\\`);\r",
+					"                } else if (schemaType === 'number' && typeof value !== 'number') {\r",
+					"                    errors.push(\\`Type mismatch at \\${currentPath}: expected number, got \\${actualType}\\`);\r",
+					"                } else if (schemaType !== 'integer' && schemaType !== 'number' && actualType !== schemaType) {\r",
+					"                    errors.push(\\`Type mismatch at \\${currentPath}: expected \\${schemaType}, got \\${actualType}\\`);\r",
+					"                }\r",
+					"            }\r",
+					"        }\r",
+					"    });\r",
+					"    \r",
+					"    return errors;\r",
+					"}`);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e84609ff-8b5a-4361-be04-8aa71d5e312c",
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
