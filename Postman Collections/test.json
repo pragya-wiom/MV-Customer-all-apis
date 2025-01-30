@@ -91,7 +91,7 @@
 							"\r",
 							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
 							"\r",
-							"pm.test(\"Validate response structure and types\", function () {\r",
+							"pm.test(\"Validate response structure and types1\", function () {\r",
 							"    const jsonData = pm.response.json();\r",
 							"    \r",
 							"    // Run the validation using the compareObjects function\r",
