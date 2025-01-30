@@ -1835,7 +1835,7 @@
 							"    }\r",
 							"  },\r",
 							"  \"required\": [\"status\", \"msg\", \"data\", \"settings\"]\r",
-							"};\r",
+							"// };\r",
 							"\r",
 							"const myPackage = pm.require('@blue22-2976/customfunc')\r",
 							"\r",
