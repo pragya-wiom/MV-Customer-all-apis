@@ -609,6 +609,7 @@
 							"                    \"items\": { \"type\": \"integer\" }\r",
 							"                },\r",
 							"                \"BOOKING_FEE\": { \"type\": \"number\" },\r",
+							"                \"DYNAMIC_BOOKING_FEE\":  { \"type\": \"string\" },\r",
 							"                \"appDownloadLink\": { \"type\": \"string\" },\r",
 							"                \"latestAppVersion\": { \"type\": \"string\" },\r",
 							"                \"AUTOPAY_DISCOUNT_LIST\": {\r",
