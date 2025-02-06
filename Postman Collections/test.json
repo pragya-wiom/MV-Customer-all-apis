@@ -1897,6 +1897,131 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "FetchNasUsage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9c7b4a52-4f9b-4b67-93e5-c09b61ca3cbf",
+						"exec": [
+							"const schema = {\r",
+							"    type: \"object\",\r",
+							"    properties: {\r",
+							"        status: { type: \"integer\" },\r",
+							"        msg: { type: \"string\" },\r",
+							"        settings: { type: [\"null\", \"array\"] }, // settings can be either null or an array\r",
+							"        data: { type: \"number\" } // data is a number (double)\r",
+							"    }\r",
+							"};\r",
+							"\r",
+							"pm.test(\"Validate response structure and types\", function () {\r",
+							"    try {\r",
+							"        const jsonData = pm.response.json();\r",
+							"        \r",
+							"        // Define the schema\r",
+							"      \r",
+							"        // Get and evaluate the compareObjects function\r",
+							"        const compareObjectsStr = pm.globals.get(\"compareObjectsStr\");\r",
+							"        eval(compareObjectsStr);\r",
+							"        \r",
+							"        // Run the validation\r",
+							"        const errors = compareObjects(schema, jsonData);\r",
+							"        \r",
+							"        if (errors.length > 0) {\r",
+							"            // Print each error as a separate test case\r",
+							"            errors.forEach(error => {\r",
+							"                pm.test(`Schema Validation Error: ${error}`, () => {\r",
+							"                    pm.expect(false, error).to.be.true;\r",
+							"                });\r",
+							"            });\r",
+							"        } else {\r",
+							"            pm.test(\"Schema validation passed\", () => {\r",
+							"                pm.expect(true).to.be.true;\r",
+							"            });\r",
+							"        }\r",
+							"    } catch (error) {\r",
+							"        pm.test(`Validation failed with error: ${error.message}`, () => {\r",
+							"            pm.expect(false, error.message).to.be.true;\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"id": "b4f562cd-b2ff-481d-aac3-808aa7269d69",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user-agent",
+						"value": "Dart/3.4 (dart:io)"
+					},
+					{
+						"key": "accept-encoding",
+						"value": "gzip"
+					},
+					{
+						"key": "cookie",
+						"value": "JWT_TOKEN=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1ZTgwMTZlLTJmMDgtNDZkZC05ZDAyLWJkM2YwYTlkYjEyYiIsInVzZXJJZCI6IjEzNzQzOTA3NjUxNiIsIm1vYmlsZSI6IjExMTExMzk5ODYiLCJ3bF90b2tlbiI6IjBDRTdEOTM2LTA3MjUtNDk5OS05N0VFLUJEQzEwNjlCOTg0NiIsImxvZ2luTmFtZSI6IiIsImFjY291bnRJZCI6IjI3NDg3ODAwODM0MiIsInJkQWNjb3VudElkIjoiNzU1OTE0MzQ1NDk0IiwibmFzSWQiOiI0ODMwNjMiLCJhcHBzIjoiW1wiSE9NRV9ST1VURVJcIl0iLCJhZG1pbklkIjoiMTM3NDM5MDc2NTE2IiwiaTJlMV9hZG1pbl90b2tlbiI6IjBDRTdEOTM2LTA3MjUtNDk5OS05N0VFLUJEQzEwNjlCOTg0NiIsInVzZXJUeXBlIjoiU1RBTkRBUkQiLCJmZWF0dXJlcyI6Im51bGwiLCJhZG1pbkV4dHJhRGF0YSI6Int9IiwiZW1haWwiOiIxMTExMTM5OTg2IiwidXNlcm5hbWUiOiIxMTExMTM5OTg2IiwiYWRtaW5OYW1lIjoiZXppbyB0ZXN0IiwibmJmIjoxNzM2OTQwNTczLCJleHAiOjE3MzcwMjY5NzMsImlhdCI6MTczNjk0MDU3M30.-y8saAxN0oJKMcbkSz0qPh77AC670bkdtBSKWTENNk4SAcW75xUHVLwqQwr6tqNxRA4r1kIZbrTWxelpN3cI4A;a=b"
+					},
+					{
+						"key": "content-length",
+						"value": "0"
+					},
+					{
+						"key": "host",
+						"value": "customer.qa.i2e1.in"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json"
+					},
+					{
+						"key": "jwt_token",
+						"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU1ZTgwMTZlLTJmMDgtNDZkZC05ZDAyLWJkM2YwYTlkYjEyYiIsInVzZXJJZCI6IjEzNzQzOTA3NjUxNiIsIm1vYmlsZSI6IjExMTExMzk5ODYiLCJ3bF90b2tlbiI6IjBDRTdEOTM2LTA3MjUtNDk5OS05N0VFLUJEQzEwNjlCOTg0NiIsImxvZ2luTmFtZSI6IiIsImFjY291bnRJZCI6IjI3NDg3ODAwODM0MiIsInJkQWNjb3VudElkIjoiNzU1OTE0MzQ1NDk0IiwibmFzSWQiOiI0ODMwNjMiLCJhcHBzIjoiW1wiSE9NRV9ST1VURVJcIl0iLCJhZG1pbklkIjoiMTM3NDM5MDc2NTE2IiwiaTJlMV9hZG1pbl90b2tlbiI6IjBDRTdEOTM2LTA3MjUtNDk5OS05N0VFLUJEQzEwNjlCOTg0NiIsInVzZXJUeXBlIjoiU1RBTkRBUkQiLCJmZWF0dXJlcyI6Im51bGwiLCJhZG1pbkV4dHJhRGF0YSI6Int9IiwiZW1haWwiOiIxMTExMTM5OTg2IiwidXNlcm5hbWUiOiIxMTExMTM5OTg2IiwiYWRtaW5OYW1lIjoiZXppbyB0ZXN0IiwibmJmIjoxNzM2OTQwNTczLCJleHAiOjE3MzcwMjY5NzMsImlhdCI6MTczNjk0MDU3M30.-y8saAxN0oJKMcbkSz0qPh77AC670bkdtBSKWTENNk4SAcW75xUHVLwqQwr6tqNxRA4r1kIZbrTWxelpN3cI4A"
+					}
+				],
+				"url": {
+					"raw": "https://customer.{{env}}.i2e1.in/customer/reports/FetchNasUsageV2?nasid=483063&fromDate=2025-01-15&toDate=2025-01-15",
+					"protocol": "https",
+					"host": [
+						"customer",
+						"{{env}}",
+						"i2e1",
+						"in"
+					],
+					"path": [
+						"customer",
+						"reports",
+						"FetchNasUsageV2"
+					],
+					"query": [
+						{
+							"key": "nasid",
+							"value": "483063"
+						},
+						{
+							"key": "fromDate",
+							"value": "2025-01-15"
+						},
+						{
+							"key": "toDate",
+							"value": "2025-01-15"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
