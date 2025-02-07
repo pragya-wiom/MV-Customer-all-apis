@@ -938,10 +938,6 @@
 						"value": "gzip"
 					},
 					{
-						"key": "content-length",
-						"value": "143"
-					},
-					{
 						"key": "host",
 						"value": "customer.qa.i2e1.in"
 					}
