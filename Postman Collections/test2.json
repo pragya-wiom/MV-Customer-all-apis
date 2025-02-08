@@ -1488,6 +1488,34 @@
 		},
 		{
 			"name": "RescheduleAutopay",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7ec65f88-5125-4a39-8900-9a8b4db5525c",
+						"exec": [
+							"pm.test(\"Validate API Response\", function () {\r",
+							"    let response = pm.response.json();\r",
+							"\r",
+							"    // Check if status is 0, then sucess the test\r",
+							"    if (response.status === 0) {\r",
+							"         pm.test(\"API validation passed\", function () {\r",
+							"            pm.expect(response.status).to.be.a(\"number\");\r",
+							"        });\r",
+							"        \r",
+							"    } else {\r",
+							"       pm.test(\"API validation failed - status is 1\", function () {\r",
+							"            pm.expect(response.status, \"Status should not be 1\").to.not.equal(1);\r",
+							"        });\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"id": "6d89efab-a374-430b-923c-12c681413a9a",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
@@ -1501,7 +1529,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile=1941427002 &rescheduleDate=1",
+					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile=1941427002 &rescheduleDate=",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1516,7 +1544,7 @@
 						},
 						{
 							"key": "rescheduleDate",
-							"value": "1"
+							"value": ""
 						}
 					]
 				}
