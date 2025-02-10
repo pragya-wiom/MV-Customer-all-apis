@@ -15,9 +15,9 @@
 						"exec": [
 							"\r",
 							"let response = pm.response.json();\r",
-							"let nasid = response.wgPolicy.nasid\r",
-							"let deviceId = response.wgPolicy.deviceId\r",
-							"let planId = response.wgPolicy.planId\r",
+							"let nasid = response.data.wgPolicy.nasid\r",
+							"let deviceId = response.data.wgPolicy.deviceId\r",
+							"let planId = response.data.wgPolicy.planId\r",
 							"pm.collectionVariables.set(\"nasid\", nasid);\r",
 							"pm.collectionVariables.set(\"deviceId\", deviceId);\r",
 							"pm.collectionVariables.set(\"planId\", planId);\r",
@@ -157,7 +157,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid={{nasid}}&mobile=11111139945&deviceId={{deviceId}}&planId={{planId}}",
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid={{nasid}}&mobile={{mobile}}&deviceId={{deviceId}}&planId={{planId}}",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -172,7 +172,7 @@
 						},
 						{
 							"key": "mobile",
-							"value": "11111139945"
+							"value": "{{mobile}}"
 						},
 						{
 							"key": "deviceId",
@@ -1897,7 +1897,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "c2c5def3-a251-4fa5-8cbd-d1ffd03444bb",
+				"id": "ce24da7b-2116-4f8f-9d35-e075cb632cb5",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -2036,7 +2036,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "23aca699-a564-46a6-9f4c-fef0375c0670",
+				"id": "bc296d6b-66d7-4c89-9779-a156d6a40f95",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -2081,7 +2081,22 @@
 	"variable": [
 		{
 			"key": "mobile",
-			"value": "1111178781",
+			"value": "1111139911",
+			"type": "string"
+		},
+		{
+			"key": "nasid",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "deviceId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "planId",
+			"value": "",
 			"type": "string"
 		}
 	]
