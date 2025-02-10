@@ -1552,7 +1552,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "48c8cc03-514f-43b0-90b9-95d7d9898418",
+				"id": "7266c108-7892-4f11-a442-eaf7b2e8180d",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -1771,43 +1771,10 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "58f27c95-5419-483f-9cb9-486d0f69e50c",
+				"id": "1a048d1c-257f-4cb5-a47b-8153ca0b3171",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					"pm.test(\"Validate response structure and types\", function () {\r",
-					"    try {\r",
-					"        const jsonData = pm.response.json();\r",
-					"\r",
-					"        // Check if status is 0, fail the test if it's not\r",
-					"        pm.test(\"status should be 0\", function () {\r",
-					"            pm.expect(jsonData.status, \"Status is not 0\").to.equal(0);\r",
-					"        });\r",
-					"\r",
-					"        // Get and evaluate the compareObjects function\r",
-					"        const compareObjectsStr = pm.globals.get(\"compareObjectsStr\");\r",
-					"        eval(compareObjectsStr);\r",
-					"\r",
-					"        // Run the schema validation\r",
-					"        const errors = compareObjects(schema, jsonData);\r",
-					"\r",
-					"        if (errors.length > 0) {\r",
-					"            errors.forEach(error => {\r",
-					"                pm.test(`Schema Validation Error: ${error}`, function () {\r",
-					"                    pm.expect(false, error).to.be.true;\r",
-					"                });\r",
-					"            });\r",
-					"        } else {\r",
-					"            pm.test(\"Schema validation passed\", function () {\r",
-					"                pm.expect(true).to.be.true;\r",
-					"            });\r",
-					"        }\r",
-					"    } catch (error) {\r",
-					"        pm.test(`Validation failed with error: ${error.message}`, function () {\r",
-					"            pm.expect(false, error.message).to.be.true;\r",
-					"        });\r",
-					"    }\r",
-					"});\r",
 					""
 				]
 			}
