@@ -26,8 +26,8 @@
 						"exec": [
 							"let response = pm.response.json();\r",
 							"let nasid = response.data.wgPolicy.nasid;\r",
-							"let deviceId = response.data.wgpolicy.deviceId;\r",
-							"let planId = repsonse.data.wgPolicy.planId;\r",
+							"let deviceId = response.data.wgPolicy.deviceId;\r",
+							"let planId = response.data.wgPolicy.planId;\r",
 							"\r",
 							"pm.collectionVariables.set(\"nasid\", nasid);\r",
 							"pm.collectionVariables.set(\"deviceId\", deviceId);\r",
