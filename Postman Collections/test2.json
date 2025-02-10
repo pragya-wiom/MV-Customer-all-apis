@@ -174,7 +174,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid=482941&mobile={{mobile}}&deviceId={{deviceId}}&planId={{planId}}",
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid={{nasid}}&mobile={{mobile}}&deviceId={{deviceId}}&planId={{planId}}",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -185,7 +185,7 @@
 					"query": [
 						{
 							"key": "nasid",
-							"value": "482941"
+							"value": "{{nasid}}"
 						},
 						{
 							"key": "mobile",
