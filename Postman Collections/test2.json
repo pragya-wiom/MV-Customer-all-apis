@@ -138,6 +138,15 @@
 						"value": "*/*"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"mobile\": \"{{mobile}}\",\r\n\"nasid\": \"{{nasid}}\",\r\n\"deviceId\": \"{{deviceId}}\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid=482941&mobile=1111169238&deviceId=qa_28&planId=14704",
 					"host": [
