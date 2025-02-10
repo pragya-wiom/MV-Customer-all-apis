@@ -24,6 +24,17 @@
 					"script": {
 						"id": "2c8c06ec-9d9a-4624-a826-bf03c7bcf2fd",
 						"exec": [
+							"let response = pm.response.json();\r",
+							"let nasid = response.data.wgPolicy.nasid;\r",
+							"let deviceId = response.data.wgpolicy.deviceId;\r",
+							"let planId = repsonse.data.wgPolicy.planId;\r",
+							"\r",
+							"pm.collectionVariables.set(\"nasid\", nasid);\r",
+							"pm.collectionVariables.set(\"deviceId\", deviceId);\r",
+							"pm.collectionVariables.set(\"planId\", planId);\r",
+							"\r",
+							"\r",
+							"\r",
 							"pm.test(\"Validate response structure and types\", function () {\r",
 							"    try {\r",
 							"        // Ensure response is in JSON format\r",
@@ -153,6 +164,15 @@
 						"value": "*/*"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"mobile\": \"{{mobile}}\",\r\n\"nasid\": \"{{nasid}}\",\r\n\"deviceId\": \"{{deviceId}}\",\r\n\"planId\": \"{{planId}}\"\r\n\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid=482941&mobile={{mobile}}&deviceId=qa_28&planId=14704",
 					"host": [
