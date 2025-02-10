@@ -157,7 +157,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid=482941&mobile=1111169238&deviceId=qa_28&planId=14704",
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetWgPolicy_V2?nasid={{nasid}}&mobile=11111139945&deviceId={{deviceId}}&planId={{planId}}",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -168,19 +168,19 @@
 					"query": [
 						{
 							"key": "nasid",
-							"value": "482941"
+							"value": "{{nasid}}"
 						},
 						{
 							"key": "mobile",
-							"value": "1111169238"
+							"value": "11111139945"
 						},
 						{
 							"key": "deviceId",
-							"value": "qa_28"
+							"value": "{{deviceId}}"
 						},
 						{
 							"key": "planId",
-							"value": "14704"
+							"value": "{{planId}}"
 						}
 					]
 				}
