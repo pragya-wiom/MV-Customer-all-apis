@@ -581,7 +581,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/reports/FetchNasUsageV2?nasid=16114&fromDate=2025-02-01%2000%3A00%3A00.000&toDate=2025-02-04%2000%3A00%3A00.000",
+					"raw": "{{scheme}}{{domain_customer}}/customer/reports/FetchNasUsageV2?nasid={{nasid}}&fromDate=2025-02-09%2000%3A00%3A00.000&toDate=2025-02-10%2000%3A00%3A00.000",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -593,15 +593,15 @@
 					"query": [
 						{
 							"key": "nasid",
-							"value": "16114"
+							"value": "{{nasid}}"
 						},
 						{
 							"key": "fromDate",
-							"value": "2025-02-01%2000%3A00%3A00.000"
+							"value": "2025-02-09%2000%3A00%3A00.000"
 						},
 						{
 							"key": "toDate",
-							"value": "2025-02-04%2000%3A00%3A00.000"
+							"value": "2025-02-10%2000%3A00%3A00.000"
 						}
 					]
 				}
