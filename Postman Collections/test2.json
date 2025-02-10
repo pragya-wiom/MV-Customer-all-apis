@@ -14,6 +14,15 @@
 						"id": "b92ce86e-5b7b-4922-a7d0-ddb80360fa3d",
 						"exec": [
 							"\r",
+							"let response = pm.response.json();\r",
+							"let nasid = response.wgPolicy.nasid\r",
+							"let deviceId = response.wgPolicy.deviceId\r",
+							"let planId = response.wgPolicy.planId\r",
+							"pm.collectionVariables.set(\"nasid\", nasid);\r",
+							"pm.collectionVariables.set(\"deviceId\", deviceId);\r",
+							"pm.collectionVariables.set(\"planId\", planId);\r",
+							"\r",
+							"\r",
 							"const schema = {\r",
 							"  \"type\": \"object\",\r",
 							"  \"properties\": {\r",
@@ -140,7 +149,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"mobile\": \"{{mobile}}\",\r\n\"nasid\": \"{{nasid}}\",\r\n\"deviceId\": \"{{deviceId}}\"\r\n}\r\n",
+					"raw": "{\r\n\"mobile\": \"{{mobile}}\",\r\n\"nasid\": \"{{nasid}}\",\r\n\"deviceId\": \"{{deviceId}}\",\r\n\"planId\": \"{{planId}}\"\r\n\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
