@@ -1879,7 +1879,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "0e2a4198-6493-416b-a786-98b547727789",
+				"id": "c2c5def3-a251-4fa5-8cbd-d1ffd03444bb",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -2018,7 +2018,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "67fc7570-149c-493a-befd-f610f7cad52b",
+				"id": "23aca699-a564-46a6-9f4c-fef0375c0670",
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
@@ -2058,6 +2058,13 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "mobile",
+			"value": "1111178781",
+			"type": "string"
 		}
 	]
 }
