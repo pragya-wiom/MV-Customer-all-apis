@@ -631,7 +631,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"userSsid\":\"1111169237\",\"ssidPass\":\"12345678\",\"fcmToken\":\"BY_PASS\",\"appVersion\":\"9999\",\"advertisingId\":\"12f363a0-f1a9-4b7f-9a1e-54429cdac42f\"}",
+					"raw": "{\"userSsid\":\"{{mobile}}\",\"ssidPass\":\"12345678\",\"fcmToken\":\"BY_PASS\",\"appVersion\":\"9999\",\"advertisingId\":\"12f363a0-f1a9-4b7f-9a1e-54429cdac42f\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -870,7 +870,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/GetPlansOnNas?nasid=482929&getDiscountedPlans=true",
+					"raw": "{{scheme}}{{domain_customer}}/customer/GetPlansOnNas?nasid={{nasid}}&getDiscountedPlans=true",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -881,7 +881,7 @@
 					"query": [
 						{
 							"key": "nasid",
-							"value": "482929"
+							"value": "{{nasid}}"
 						},
 						{
 							"key": "getDiscountedPlans",
@@ -889,7 +889,7 @@
 						},
 						{
 							"key": "",
-							"value": null,
+							"value": "",
 							"type": "text",
 							"disabled": true
 						}
@@ -975,7 +975,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/UpdateSSIDandPassword?nasid=482929&ssid=2769696965&password=12345678&onlyPassUpdate=true",
+					"raw": "{{scheme}}{{domain_customer}}/customer/UpdateSSIDandPassword?nasid={{nasid}}&ssid={{mobile}}&password=12345678&onlyPassUpdate=true",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -986,11 +986,11 @@
 					"query": [
 						{
 							"key": "nasid",
-							"value": "482929"
+							"value": "{{nasid}}"
 						},
 						{
 							"key": "ssid",
-							"value": "2769696965"
+							"value": "{{mobile}}"
 						},
 						{
 							"key": "password",
@@ -1081,7 +1081,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/UpgradePlan?nasid=33557&appVersion=1",
+					"raw": "{{scheme}}{{domain_customer}}/customer/UpgradePlan?nasid={{nasid}}&appVersion=1",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1092,7 +1092,7 @@
 					"query": [
 						{
 							"key": "nasid",
-							"value": "33557"
+							"value": "{{nasid}}"
 						},
 						{
 							"key": "appVersion",
@@ -1118,7 +1118,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/ScheduleJobCancelMandate?mobile=1941427002&reasons=123456",
+					"raw": "{{scheme}}{{domain_customer}}/customer/ScheduleJobCancelMandate?mobile={{mobile}}&reasons=123456",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1129,7 +1129,7 @@
 					"query": [
 						{
 							"key": "mobile",
-							"value": "1941427002"
+							"value": "{{mobile}}"
 						},
 						{
 							"key": "reasons",
@@ -1155,7 +1155,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/DeleteJobCancelMandate?mobile=123456",
+					"raw": "{{scheme}}{{domain_customer}}/customer/DeleteJobCancelMandate?mobile={{mobile}}",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1166,7 +1166,7 @@
 					"query": [
 						{
 							"key": "mobile",
-							"value": "123456"
+							"value": "{{mobile}}"
 						}
 					]
 				}
