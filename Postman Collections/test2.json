@@ -1216,7 +1216,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile=1941427002 &rescheduleDate=",
+					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile={{mobile}} &rescheduleDate=",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1227,7 +1227,7 @@
 					"query": [
 						{
 							"key": "mobile",
-							"value": "1941427002 "
+							"value": "{{mobile}} "
 						},
 						{
 							"key": "rescheduleDate",
