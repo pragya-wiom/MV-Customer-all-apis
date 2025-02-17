@@ -631,7 +631,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"userSsid\":\"1111138652\",\"ssidPass\":\"12345678\",\"fcmToken\":\"BY_PASS\",\"appVersion\":\"9999\",\"advertisingId\":\"12f363a0-f1a9-4b7f-9a1e-54429cdac42f\"}",
+					"raw": "{\r\n    \"userSsid\": \"1111138652\",\r\n    \"ssidPass\": \"12345678\",\r\n    \"fcmToken\": \"BY_PASS\",\r\n    \"appVersion\": \"9999\",\r\n    \"advertisingId\": \"12f363a0-f1a9-4b7f-9a1e-54429cdac24f\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
