@@ -1216,7 +1216,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile={{mobile}} &rescheduleDate=",
+					"raw": "{{scheme}}{{domain_customer}}/customer/RescheduleAutopay?mobile={{mobile}} &rescheduleDate=123456",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1231,7 +1231,7 @@
 						},
 						{
 							"key": "rescheduleDate",
-							"value": ""
+							"value": "123456"
 						}
 					]
 				}
@@ -1319,7 +1319,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{scheme}}{{domain_customer}}/customer/CheckCustomerList?mobiles=9999451019",
+					"raw": "{{scheme}}{{domain_customer}}/customer/CheckCustomerList?mobiles={{mobile}}",
 					"host": [
 						"{{scheme}}{{domain_customer}}"
 					],
@@ -1330,7 +1330,7 @@
 					"query": [
 						{
 							"key": "mobiles",
-							"value": "9999451019"
+							"value": "{{mobile}}"
 						}
 					]
 				}
