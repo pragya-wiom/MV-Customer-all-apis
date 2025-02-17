@@ -13,7 +13,18 @@
 					"script": {
 						"id": "8b065437-03c2-49d5-9b4b-af81077ed04c",
 						"exec": [
-							""
+							"let latestMobile = pm.collectionVariables.get(\"mobile\");\r",
+							"\r",
+							"if (latestMobile && !isNaN(latestMobile)) { \r",
+							"    let nextMobile = parseInt(latestMobile, 10) + 1;\r",
+							"    \r",
+							"    // Update the collection variable for the next run\r",
+							"    pm.collectionVariables.set(\"mobile\", nextMobile);\r",
+							"    \r",
+							"    console.log(`🔄 Mobile Number for this Run: ${nextMobile}`);\r",
+							"} else {\r",
+							"    console.log(\"⚠️ No valid mobile number found in collection variables.\");\r",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}
